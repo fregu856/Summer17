@@ -1,0 +1,282 @@
+<!DOCTYPE>
+<hmtl>
+<head>
+    <title>RCcar Control Center</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/keen-dashboards.css" rel="stylesheet" />
+</head>
+
+<header>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+
+                <a class="navbar-brand" href="/">RCcar Control Center</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="/phone">Phone</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<br />
+<br />
+
+<body style="background: #f2f2f2">
+
+    <div class="container-fluid">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{message}}
+                    </div>
+                {% endfor %}
+           {% endif %}
+        {% endwith %}
+
+        </br>
+        </br>
+
+        <!-- new row: -->
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="chart-wrapper">
+                    <div class="chart-title">
+
+                    </div>
+
+                    <div class="chart-stage">
+                        <div style="text-align: center">
+                            <img src="/camera_normal" style="width: 640px; height: 360px" />
+                        </div>
+                    </div>
+
+                    <div class="chart-notes">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="chart-wrapper">
+                    <div class="chart-title">
+
+                    </div>
+
+                    <div class="chart-stage">
+                        <div style="text-align: center">
+                            <img src="/camera_YOLO" style="width: 640px; height: 360px"  />
+                        </div>
+                    </div>
+
+                    <div class="chart-notes">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="chart-wrapper">
+                    <div class="chart-title">
+
+                    </div>
+
+                    <div class="chart-stage">
+                        <div style="text-align: center">
+                            <img src="/camera_MultiNet" style="width: 640px; height: 360px"  />
+                        </div>
+                    </div>
+
+                    <div class="chart-notes">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- new row: -->
+        <div class="row">
+
+          <div class="col-md-12" id="test">
+              <div class="chart-wrapper">
+                  <div class="chart-title">
+
+                  </div>
+
+                  <div class="chart-stage" style="height: 360px; width:100%">
+                      <div style="text-align: center">
+                          </br>
+
+                          <div class="btn-group" role="group">
+                              <button type="button" id="manual_button" class="btn btn-default" style="width: 90px; height: 40px">Manual</button>
+                              <button type="button" id="auto_button" class="btn btn-default" style="width: 90px; height: 40px">Auto</button>
+                          </div>
+                          </br>
+                          </br>
+
+                          <p>Current throttle direction: <span id="throttle_direction"></span> </p>
+                          <p>Current steering direction: <span id="steering_direction"></span> </p>
+                          <p>Current mode: <span id="mode"></span> </p>
+
+                          <br />
+                      </div>
+                  </div>
+
+                  <div class="chart-notes">
+
+                  </div>
+              </div>
+          </div>
+
+        </div>
+
+    </div>
+
+    <!-- external scripts: (the order DOES seem to matter) -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/canvasjs.min.js') }}"></script>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        // buttons:
+        function mode_handler(mode_data)
+        {
+            socket.emit("mode_event", {data: mode_data});
+        }
+
+        var previous_data = "";
+
+        // keyboard:
+        function key_press_handler(event)
+        {
+            var pressed_key_utf8 = event.keyCode;
+            switch (pressed_key_utf8)
+            {
+                case 87:    // W key (up)
+                case 119:   // w key (up)
+                {
+                    if (previous_data !== "Forward") // only send data if it is new data (only send once per key press)
+                    {
+                        socket.emit("throttle_arrow_event", {data: "Forward"});
+                        previous_data = "Forward";
+                    }
+                    break;
+                }
+
+                case 83:  // S key (down)
+                case 115:  // s key (down)
+                {
+                    if (previous_data !== "Backward")
+                    {
+                        socket.emit("throttle_arrow_event", {data: "Backward"});
+                        previous_data = "Backward";
+                    }
+                    break;
+                }
+
+                case 68:  // D key (right)
+                case 100:  // d key (right)
+                {
+                    if (previous_data !== "Right")
+                    {
+                        socket.emit("steering_arrow_event", {data: "Right"});
+                        previous_data = "Right";
+                    }
+                    break;
+                }
+
+                case 65:  // A key (left)
+                case 97:  // a key (left)
+                {
+                    if (previous_data !== "Left")
+                    {
+                        socket.emit("steering_arrow_event", {data: "Left"});
+                        previous_data = "Left";
+                    }
+                    break;
+                }
+
+                default:
+                {
+                    break;
+                }
+            }
+        }
+
+        function key_up_handler(event)
+        {
+            var released_key_utf8 = event.keyCode;
+            switch (released_key_utf8)
+            {
+                case 87:    // W key (up)
+                case 119:   // w key (up)
+                case 83:    // S key (down)
+                case 115:   // s key (down)
+                {
+                    socket.emit("throttle_arrow_event", {data: "No_throttle"});
+                    previous_data = "No_throttle";
+                    break;
+                }
+
+                case 68:    // D key (right)
+                case 100:   // d key (right)
+                case 65:    // A key (left)
+                case 97:    // a key (left)
+                {
+                    socket.emit("steering_arrow_event", {data: "No_steering"});
+                    previous_data = "No_steering";
+                    break;
+                }
+
+                default:
+                {
+                   break;
+                }
+            }
+        }
+
+        function data_handler(sent_dict)
+        {
+            document.getElementById("throttle_direction").innerHTML = sent_dict["throttle_direction"];
+            document.getElementById("steering_direction").innerHTML = sent_dict["steering_direction"];
+            document.getElementById("mode").innerHTML = sent_dict["mode"];
+        }
+
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on("new_data", data_handler);
+
+        // buttons:
+        document.getElementById("manual_button").addEventListener("mousedown", function () { mode_handler("Manual") })
+        document.getElementById("auto_button").addEventListener("mousedown", function () { mode_handler("Auto") })
+
+        // keyboard:
+        document.onkeypress = key_press_handler;
+        document.onkeyup = key_up_handler;
+    </script>
+</body>
+
+</html>
