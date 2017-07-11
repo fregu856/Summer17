@@ -53,7 +53,7 @@ def send_to_RPI(message):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connect to the RPI server:
-    host = "192.168.0.12" # (RPI IP address)
+    host = "172.24.1.1" # (RPI IP address)
     port = 9999
     client_socket.connect((host, port))
 
@@ -542,4 +542,4 @@ if __name__ == '__main__':
     thread_web.start()
 
     # start the local web app:
-    socketio.run(app, "192.168.0.11")
+    socketio.run(app, "172.24.1.72")

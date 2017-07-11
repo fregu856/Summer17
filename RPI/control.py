@@ -13,7 +13,9 @@ throttle = 0
 steering_angle = 0
 
 throttle_max = 0.25 # (actually, the max is 1, but we limit the speed)
-throttle_min = -0.4 # (actually, the min is -1, but we limit the speed)
+throttle_min = -0.35 # (actually, the min is -1, but we limit the speed)
+throttle_max_physical = 1
+throttle_min_physical = -1
 steering_angle_max = 1
 steering_angle_min = -1
 
@@ -33,7 +35,7 @@ def comm_thread():
     # create a TCP/IP socket:
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    host = "192.168.0.12" # (RPI IP address)
+    host = "172.24.1.1" # (RPI IP address)
     port = 9999
 
     # bind to the port:
@@ -84,13 +86,17 @@ def comm_thread():
 def control_thread():
     global cycles_without_web_contact, steering_angle, throttle
 
+    global braking
+
+    braking = False
+
     throttle_channel = 0 # (the motor is connected to channel 0 on the pwm driver)
     steering_channel = 1 # (the steering servo is connected to channel 1 on the pwm driver)
     pwm_frequency = 60 # (60 Hz is a standard choice for servos)
 
-    left_pulse = 510 # (pwm pulse length corr. to maximum left turn)
-    right_pulse = 310 # (pwm pulse length corr. to maximum right turn)
-    straight_pulse = 400 # (pwm pulse length corr. to 0 steering angle)
+    left_pulse = 490 # (pwm pulse length corr. to maximum left turn)
+    right_pulse = 330 # (pwm pulse length corr. to maximum right turn)
+    straight_pulse = 410 # (pwm pulse length corr. to 0 steering angle)
 
     min_pulse = 300 # (pwm pulse length corr. to maximum reverse throttle)
     max_pulse = 500 # (pwm pulse length corr. to maximum forward throttle)
@@ -168,30 +174,43 @@ def control_thread():
             else:
                 # increase the throttle slightly (more forward throttle):
                 throttle = throttle + 0.025
+            braking = False
         elif throttle_direction == "Backward":
             if throttle > 0.001: # (if currently driving forward:)
-                # apply maximum breaking force (on our specific RC car at least,
+                # apply maximum braking force (on our specific RC car at least,
                 # going from positive to negative throttle once will stop the forward
                 # motion but not put into reverse. To stop a forward motion and then
-                # start reversing, one needs to first apply a negative throttle, least
+                # start reversing, one needs to first apply a negative throttle, let
                 # the throttle go back to 0 and then apply a negative throttle again):
                 throttle = -1
+                braking = True
             else:
                 # decrease the throttle slightly (more reverse throttle):
                 throttle = throttle - 0.025
+                if throttle > -1:
+                    braking = False
         elif throttle_direction == "No_throttle":
             if throttle > 0.001:
                 # decrease the throttle slightly from positive (forward) towards 0:
                 throttle = throttle - 0.025
             elif throttle < -0.001:
-                # increase the throttle slightly from negative (reverse/breaking) towards 0:
+                # increase the throttle slightly from negative (reverse/braking) towards 0:
                 throttle = throttle + 0.025
+            braking = False
 
-        # # limit the throttle to [throttle_min, throttle_max]:
-        if throttle > throttle_max:
-            throttle = throttle_max
-        elif throttle < throttle_min:
-            throttle = throttle_min
+        # # limit the throttle:
+        if not braking:
+            # limit the throttle to [throttle_min, throttle_max]:
+            if throttle > throttle_max:
+                throttle = throttle_max
+            elif throttle < throttle_min:
+                throttle = throttle_min
+        else: # (if currently braking the car:)
+            # allow throttle = -1 (maximum braking force):
+            if throttle > throttle_max:
+                throttle = throttle_max
+            elif throttle < throttle_min_physical:
+                throttle = throttle_min_physical
 
         # # convert throttle to the corr. pwm pulse length via linear interpolation:
         throttle_pulse = linear_interp(throttle, -1, 1, min_pulse, max_pulse)
@@ -214,14 +233,20 @@ def control_thread():
         time.sleep(0.05)
 
 def stop_runaway_car():
-    global mode, throttle, steering_angle, throttle_direction, steering_direction
+    global mode, throttle, steering_angle
+    global throttle_direction, steering_direction, braking
 
     # set all variables to make the car stop:
     mode = "manual"
-    throttle_direction = "No_throttle"
+    if throttle > 0.001: # (if currently moving forward:)
+        # brake the car:
+        throttle_direction = "Backward"
+    elif braking: # (if currently braking the car:)
+        # keep braking the car:
+        throttle_direction = "Backward"
+    else:
+        throttle_direction = "No_throttle"
     steering_direction = "No_steering"
-    throttle = 0
-    steering_angle = 0
 
 # start a thread that constantly reads messages from the client:
 thread_comm = Thread(target = comm_thread)
