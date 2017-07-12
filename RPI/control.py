@@ -12,8 +12,8 @@ steering_direction = "No_steering" # (steering_direction is either "No_steering"
 throttle = 0
 steering_angle = 0
 
-throttle_max = 0.25 # (actually, the max is 1, but we limit the speed)
-throttle_min = -0.35 # (actually, the min is -1, but we limit the speed)
+throttle_max = 0.35 # (actually, the max is 1, but we limit the speed)
+throttle_min = -0.4 # (actually, the min is -1, but we limit the speed)
 throttle_max_physical = 1
 throttle_min_physical = -1
 steering_angle_max = 1
@@ -86,9 +86,10 @@ def comm_thread():
 def control_thread():
     global cycles_without_web_contact, steering_angle, throttle
 
-    global braking
+    global braking, recently_reversed
 
     braking = False
+    recently_reversed = False
 
     throttle_channel = 0 # (the motor is connected to channel 0 on the pwm driver)
     steering_channel = 1 # (the steering servo is connected to channel 1 on the pwm driver)
@@ -122,14 +123,14 @@ def control_thread():
                 steering_angle = steering_angle + 0.2
             else:
                 # increase the steering angle slightly (steer more to the right):
-                steering_angle = steering_angle + 0.1
+                steering_angle = steering_angle + 0.2
         elif steering_direction == "Left":
             # quickly decrease the steering angle from positive (right) towards 0:
             if steering_angle > 0.001:
                 steering_angle = steering_angle - 0.2
             else:
                 # decrease the steering angle slightly (steer more to the left):
-                steering_angle = steering_angle - 0.1
+                steering_angle = steering_angle - 0.2
         elif steering_direction == "No_steering": # (if the user is not pressing Forward nor Backward):
             if steering_angle > 0.001:
                 # quickly decrease the steering angle from positive (right) towards 0:
@@ -172,11 +173,13 @@ def control_thread():
                 # set the throttle to 0 to quickly make the car stop reversing:
                 throttle = 0
             else:
+                if throttle >= throttle_max:
+                    recently_reversed = False
                 # increase the throttle slightly (more forward throttle):
                 throttle = throttle + 0.025
             braking = False
         elif throttle_direction == "Backward":
-            if throttle > 0.001: # (if currently driving forward:)
+            if throttle > 0.001 and not recently_reversed: # (if currently driving forward:)
                 # apply maximum braking force (on our specific RC car at least,
                 # going from positive to negative throttle once will stop the forward
                 # motion but not put into reverse. To stop a forward motion and then
@@ -189,6 +192,7 @@ def control_thread():
                 throttle = throttle - 0.025
                 if throttle > -1:
                     braking = False
+                    recently_reversed = True
         elif throttle_direction == "No_throttle":
             if throttle > 0.001:
                 # decrease the throttle slightly from positive (forward) towards 0:
