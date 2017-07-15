@@ -30,7 +30,7 @@ Another problem you might run into is that you can't install anything using pip 
 
 ### Ubuntu RPI (for reading the LiDAR)
 
-Install Linux (Ubuntu Mate) on the RPI:  
+Install Ubuntu Mate:  
 http://turtlebot3.robotis.com/en/latest/sbc_software.html (See 6.1) (Download the file, burn the image onto the micro-SD card using e.g. Etcher, insert micro-SD into RPI, power it up and follow the instructions (need HDMI cable and usb mouse & keyboard)) (Choose a username and password of your liking, you'll use it to SSH into the RPI)
 
 Enable SSH:
