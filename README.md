@@ -33,6 +33,9 @@ Another problem you might run into is that you can't install anything using pip 
 Install Ubuntu Mate:  
 http://turtlebot3.robotis.com/en/latest/sbc_software.html (See 6.1) (Download the file, burn the image onto the micro-SD card using e.g. Etcher, insert micro-SD into RPI, power it up and follow the instructions (need HDMI cable and usb mouse & keyboard)) (Choose a username and password of your liking, you'll use it to SSH into the RPI)
 
+Install ROS:
+- Test
+
 Enable SSH:
 - $ sudo apt-get install raspi-config rpi-update
 - $ sudo raspi-config
@@ -45,10 +48,6 @@ Make it connect to the WiFi network of the Raspian RPI on boot:
 - Select the RPI network and click Edit
 - Below "General", make sure that "Automatically connect to this network when it is available" is selected
 - Edit any other networks you previously have connected to and make sure that "Automatically connect to this network when it is available" is NOT selected
-
-Install ROS:
-- Test
-
 
 *****
 
