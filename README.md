@@ -3,6 +3,8 @@
 Pictures from the build:  
 https://goo.gl/photos/LKZvyXHjr5Y9rBLAA
 
+https://drive.google.com/file/d/0B8u1-N9yBAQoOVZDZGI4dDNPdjQ/view
+
 ******
 
 ### Raspbian RPI (for video streaming, communication with the laptop and actuator control)
