@@ -40,6 +40,9 @@ Install ROS:
 - $ sudo apt-get upgrade
 - $ wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
 
+Install needed ROS packages:
+- Test
+
 Enable SSH:
 - $ sudo apt-get install raspi-config rpi-update
 - $ sudo raspi-config
@@ -63,5 +66,11 @@ Install ROS:
 Install required packages:
 - OpenCV
 - 
+- 
+
+****
+
+Setup of ROS IP addresses:
+- Connect both the laptop and the Ubuntu RPI to the Raspian RPI wifi
 - 
 
