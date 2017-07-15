@@ -8,7 +8,7 @@ https://goo.gl/photos/LKZvyXHjr5Y9rBLAA
 ### Ubuntu RPI (for reading the LiDAR)
 
 Install Linux (Ubuntu Mate) on the RPI:  
-http://turtlebot3.robotis.com/en/latest/sbc_software.html (See 6.1) (Download the file, burn the image onto the micro-sd card using e.g. Etcher, insert micro-sd into RPI, power it up and follow the instructions (need HDMI cable and usb mouse & keyboard))  
+http://turtlebot3.robotis.com/en/latest/sbc_software.html (See 6.1) (Download the file, burn the image onto the micro-sd card using e.g. Etcher, insert micro-sd into RPI, power it up and follow the instructions (need HDMI cable and usb mouse & keyboard)) (Choose a username and password of your liking, you'll use it to SSH into the RPI)
 
 Enable SSH:
 - $ sudo apt-get install raspi-config rpi-update
