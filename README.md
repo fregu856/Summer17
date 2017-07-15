@@ -28,5 +28,8 @@ Enable SSH:
 - Reboot to confirm the changes
 
 Make it connect to the WiFi network of the Raspian RPI on boot:  
-- http://weworkweplay.com/play/automatically-connect-a-raspberry-pi-to-a-wifi-network/ (I have never needed to set a static IP address)
+- Press on the WiFi symbol and select "Edit Connections"
+- Select the RPI network and click Edit
+- Below "General", make sure that "Automatically connect to this network when it is available" is selected
+- Edit any other networks you previously have connected to and make sure that "Automatically connect to this network when it is available" is NOT selected
 
