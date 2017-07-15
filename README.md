@@ -46,3 +46,19 @@ Make it connect to the WiFi network of the Raspian RPI on boot:
 - Below "General", make sure that "Automatically connect to this network when it is available" is selected
 - Edit any other networks you previously have connected to and make sure that "Automatically connect to this network when it is available" is NOT selected
 
+Install ROS:
+- Test
+
+
+*****
+
+### Laptop
+
+Install ROS:
+- Test
+
+Install required packages:
+- OpenCV
+- 
+- 
+
