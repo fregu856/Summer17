@@ -40,8 +40,10 @@ Install ROS:
 - $ sudo apt-get upgrade
 - $ wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
 
-Install needed ROS packages:
-- Test
+To use the LiDAR:
+- $ sudo apt-get install ros-kinetic-hls-lfcd-lds-driver
+- $ sudo chmod a+rw /dev/ttyUSB0 (do this when the LiDAR is plugged into the RPI)
+- $ roslaunch hls_lfcd_lds_driver hlds_laser.launch (the LiDAR should now start turning and publish messages to /scan)
 
 Enable SSH:
 - $ sudo apt-get install raspi-config rpi-update
