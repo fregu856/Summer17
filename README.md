@@ -86,3 +86,9 @@ Setup of ROS IP addresses:
 - - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://172.24.1.72:11311" and "export ROS_HOSTNAME=172.24.1.72" (where again, 172.24.1.72 is the laptop's IP address)
 - - $ source ~/.bashrc
 
+- To test that everything works:
+- - [Laptop terminal 1] $ roscore
+- - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch (the LiDAR should now start spinning, it might however take a few seconds)
+- - [Laptop terminal 2] $ rostopic echo /scan (a stream of scan messages should now start appearing in the terminal)
+
+
