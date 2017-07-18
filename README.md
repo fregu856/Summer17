@@ -80,8 +80,9 @@ Setup of ROS IP addresses:
 -- $ sudo nano ~/.bashrc
 -- Replace the second-to-last line "export ROS_MASTER_URI=http://localhost:11311" with "export ROS_MASTER_URI=http://172.24.1.72:11311" (where 172.24.1.72 is the IP address of the laptop)
 -- Replace the last line "export ROS_HOSTNAME=localhost" with "export ROS_HOSTNAME=172.24.1.57" (where 172.24.1.57 is the IP address of the Ubuntu RPI)
--- $ source ~/.bashrc
+- - $ source ~/.bashrc
 - In the laptop terminal:
--- $ sudo nano ~/.bashrc
--- Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://172.24.1.72:11311" and "export ROS_HOSTNAME=172.24.1.72" (where again, 172.24.1.72 is the laptop's IP address)
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://172.24.1.72:11311" and "export ROS_HOSTNAME=172.24.1.72" (where again, 172.24.1.72 is the laptop's IP address)
+- - $ source ~/.bashrc
 
