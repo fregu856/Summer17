@@ -74,5 +74,14 @@ Install required packages:
 
 Setup of ROS IP addresses:
 - Connect both the laptop and the Ubuntu RPI to the Raspian RPI wifi
-- 
+- SSH into the Ubuntu RPI (to do this you need its IP address, you obtain this by running $ ifconfig when it's connected to the Raspbian RPI wifi. Its  IP address is found as "inet addr" below "wlan0". In my case I got: 172.24.1.57)
+- Note the laptop's IP address (by running $ ifconfig. In my case I got: 172.24.1.72) 
+- In the Ubuntu RPI terminal:
+-- $ sudo nano ~/.bashrc
+-- Replace the second-to-last line "export ROS_MASTER_URI=http://localhost:11311" with "export ROS_MASTER_URI=http://172.24.1.72:11311" (where 172.24.1.72 is the IP address of the laptop)
+-- Replace the last line "export ROS_HOSTNAME=localhost" with "export ROS_HOSTNAME=172.24.1.57" (where 172.24.1.57 is the IP address of the Ubuntu RPI)
+-- $ source ~/.bashrc
+- In the laptop terminal:
+-- $ sudo nano ~/.bashrc
+-- Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://172.24.1.72:11311" and "export ROS_HOSTNAME=172.24.1.72" (where again, 172.24.1.72 is the laptop's IP address)
 
