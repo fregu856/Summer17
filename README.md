@@ -7,7 +7,7 @@ https://drive.google.com/file/d/0B8u1-N9yBAQoOVZDZGI4dDNPdjQ/view
 
 ******
 
-### Raspbian RPI (for video streaming, communication with the laptop and actuator control)
+### Setup: Raspbian RPI (for video streaming, communication with the laptop and actuator control)
 
 Install the latest verison of Raspian:
 - Download Raspbian with desktop: https://www.raspberrypi.org/downloads/raspbian/
@@ -30,7 +30,7 @@ Another problem you might run into is that you can't install anything using pip 
 
 *****
 
-### Ubuntu RPI (for reading the LiDAR)
+### Setup: Ubuntu RPI (for reading the LiDAR)
 
 Install Ubuntu Mate:  
 http://turtlebot3.robotis.com/en/latest/sbc_software.html (See 6.1) (Download the file, burn the image onto the micro-SD card using e.g. Etcher, insert micro-SD into RPI, power it up and follow the instructions (need HDMI cable and usb mouse & keyboard)) (Choose a username and password of your liking, you'll use it to SSH into the RPI)
@@ -60,7 +60,7 @@ Make it connect to the WiFi network of the Raspian RPI on boot:
 
 *****
 
-### Laptop
+### Setup: Laptop
 
 Install ROS:
 - Test
