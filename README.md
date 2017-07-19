@@ -129,6 +129,11 @@ Setup of ROS IP addresses:
 - - [Laptop terminal 1] $ roscore
 - - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch
 - - [Laptop terminal 2] $ rosrun rviz rviz -d /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz/basic_lidar_visualization.rviz (rviz should now open and you should see some green/yellow/red lines/dots)
+
+****
+
+Run SLAM on the laptop using Hector SLAM (only using the LiDAR scans, the car does currently not offer any odometry measurements):
+- $
  
 
 
