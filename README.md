@@ -74,7 +74,7 @@ Install required packages:
 - OpenCV
 - TODO!
 
-Create a catkin workspace (placed in Summer17/Laptop/ROS_code):
+Create and build a catkin workspace (placed in Summer17/Laptop/ROS_code):
 - $ cd Summer17/Laptop/
 - $ mkdir ROS_code
 - $ cd ROS_code
@@ -84,8 +84,21 @@ Create a catkin workspace (placed in Summer17/Laptop/ROS_code):
 - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
 - $ catkin_make
 - $ source ~/Summer17/Laptop/ROS_code/catkin_ws/devel/setup.bash
-- Add the above line (source ~/Summer17/Laptop/ROS_code/catkin_ws/devel/setup.bash) to the bottom of ~/.basrhrc ($ sudo nano ~/bashrc to open and edit it) for it to be run everytime you open a terminal
+- Add the above line (source ~/Summer17/Laptop/ROS_code/catkin_ws/devel/setup.bash) to the bottom of ~/.basrhrc ($ sudo nano ~/.bashrc to open and edit it) for it to be run everytime you open a terminal
 
+Create and build a package (called test_pckg) in the catkin workspace:
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src
+- $ catkin_create_pkg test_pckg std_msgs roscpp rospy
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- $ catkin_make
+- Create a scripts directory in the package (it's in this directory we would place all python ROS code/scripts):
+- - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
+- - $ mkdir scripts
+- Every python script that one writes and places in scripts (e.g. test.py) must be made executable:
+- - $ chmod a+x test.py
+- You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
+- - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- - $ catkin_make
 
 ****
 
