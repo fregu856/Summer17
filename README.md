@@ -122,6 +122,6 @@ Setup of ROS IP addresses:
 - - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch (the LiDAR should now start spinning, it might however take a few seconds)
 - - [Laptop terminal 2] $ rostopic echo /scan (a stream of scan messages should now start appearing in the terminal)
 - To also visualize the LiDAR measurements on the laptop using rviz:
-- - $ 
+- - - $
 
 
