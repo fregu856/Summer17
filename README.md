@@ -63,12 +63,29 @@ Make it connect to the WiFi network of the Raspian RPI on boot:
 ### Setup: Laptop
 
 Install ROS:
-- Test
+- TODO!
+
+Install needed ROS packages:
+- Catkin:
+- - TODO!
+- TODO!
 
 Install required packages:
 - OpenCV
-- 
-- 
+- TODO!
+
+Create a catkin workspace (placed in Summer17/Laptop/ROS_code):
+- $ cd Summer17/Laptop/
+- $ mkdir ROS_code
+- $ cd ROS_code
+- $ mkdir catkin_ws
+- $ cd catkin_ws/
+- $ mkdir src
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- $ catkin_make
+- $ source ~/Summer17/Laptop/ROS_code/catkin_ws/devel/setup.bash
+- Add the above line (source ~/Summer17/Laptop/ROS_code/catkin_ws/devel/setup.bash) to the bottom of ~/.basrhrc ($ sudo nano ~/bashrc to open and edit it) for it to be run everytime you open a terminal
+
 
 ****
 
