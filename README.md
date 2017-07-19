@@ -125,7 +125,11 @@ Setup of ROS IP addresses:
 - - Create a directory called "rviz" in the package test_pckg:
 - - - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
 - - - $ mkdir rviz
-- - Create a file called "basic_lidar_visualization.rviz" that is a copy of the file "hlds_laser.rviz" in https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver and place it in the rviz directory 
+- - Create a file called "basic_lidar_visualization.rviz" that is a copy of the file "hlds_laser.rviz" in https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver and place it in the rviz directory AND make it executable
+- - [Laptop terminal 1] $ roscore
+- - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch
+- - [Laptop terminal 2] $ rosrun rviz rviz -d /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz/basic_lidar_visualization.rviz (rviz should now open and you should see some green/yellow/red lines/dots)
+ 
 
 
 
