@@ -133,7 +133,12 @@ Setup of ROS IP addresses:
 ****
 
 Run SLAM on the laptop using Hector SLAM (only using the LiDAR scans, the car does currently not offer any odometry measurements):
-- $
+- Useful links: http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/rviz_cfg/mapping_demo.rviz, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/mapping_box.launch
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src
+- $ git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- $ catkin_make
+
  
 
 
