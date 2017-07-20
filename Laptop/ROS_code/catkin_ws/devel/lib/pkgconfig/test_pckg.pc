@@ -1,0 +1,8 @@
+prefix=/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/devel
+
+Name: test_pckg
+Description: Description of test_pckg
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/devel/lib 
+Requires: 

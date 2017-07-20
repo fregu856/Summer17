@@ -174,7 +174,10 @@ def control_thread():
                 throttle = 0
             else:
                 if throttle >= throttle_max:
+                    # almost guaranteed to be moving forward, allow braking with
+                    # maximum force again:
                     recently_reversed = False
+
                 # increase the throttle slightly (more forward throttle):
                 throttle = throttle + 0.025
             braking = False
@@ -187,6 +190,13 @@ def control_thread():
                 # the throttle go back to 0 and then apply a negative throttle again):
                 throttle = -1
                 braking = True
+                # (allowing maximum braking force was found necessary in order to
+                # be able to stop the car quickly. However, if one reversed the car,
+                # briefly commanded Forward (not long enough to stop
+                # the reversing motion) and then commanded Backward again, the car
+                # would start to reverse with maximum speed. To stop this from happening,
+                # after the car has been in reverse we require Forward to be commanded
+                # for some time before we allow throttle = -1 again)
             else:
                 # decrease the throttle slightly (more reverse throttle):
                 throttle = throttle - 0.025
