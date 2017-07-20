@@ -143,6 +143,9 @@ Run SLAM on the laptop using Hector SLAM (only using the LiDAR scans, the car do
 - Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz
 - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
 - $ catkin_make
+- [Laptop terminal 1] $ roscore
+- [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch
+- [Laptop terminal 2] $ roslaunch test_pckg test_Hector.launch
 
  
 
