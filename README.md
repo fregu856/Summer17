@@ -42,7 +42,7 @@ Install ROS:
 
 Setup and test the LiDAR:
 - $ sudo apt-get install ros-kinetic-hls-lfcd-lds-driver
-- $ sudo chmod a+rw /dev/ttyUSB0 (do this when the LiDAR is plugged into the RPI, YOU HAVE TO DO THIS EVERYTIME YOU RESTART THE UBUNTU RPI!)
+- $ sudo chmod a+rw /dev/ttyUSB0 (do this when the LiDAR is plugged into the RPI, YOU HAVE TO DO THIS EVERYTIME YOU RESTART THE UBUNTU RPI!) (make sure the USB cable connecting the LiDAR with the RPI is NOT charge-only)
 - $ roslaunch hls_lfcd_lds_driver hlds_laser.launch (the LiDAR should now start turning and publish messages to /scan, check this with the command $ rostopic echo /scan)
 
 Enable SSH:
