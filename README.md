@@ -42,7 +42,7 @@ Install ROS:
 
 Setup and test the LiDAR:
 - $ sudo apt-get install ros-kinetic-hls-lfcd-lds-driver
-- $ sudo chmod a+rw /dev/ttyUSB0 (do this when the LiDAR is plugged into the RPI, YOU HAVE TO DO THIS EVERYTIME YOU RESTART THE UBUNTU RPI!)
+- $ sudo chmod a+rw /dev/ttyUSB0 (do this when the LiDAR is plugged into the RPI, YOU HAVE TO DO THIS EVERYTIME YOU RESTART THE UBUNTU RPI!) (make sure the USB cable connecting the LiDAR with the RPI is NOT charge-only)
 - $ roslaunch hls_lfcd_lds_driver hlds_laser.launch (the LiDAR should now start turning and publish messages to /scan, check this with the command $ rostopic echo /scan)
 
 Enable SSH:
@@ -138,6 +138,14 @@ Run SLAM on the laptop using Hector SLAM (only using the LiDAR scans, the car do
 - $ git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
 - $ catkin_make
+- Create a directory called "launch" in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
+- Write test_Hector.launch (based on the above links) and place it in the above directory
+- Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- $ catkin_make
+- [Laptop terminal 1] $ roscore
+- [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch
+- [Laptop terminal 2] $ roslaunch test_pckg test_Hector.launch
 
  
 
