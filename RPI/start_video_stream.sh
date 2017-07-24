@@ -1,1 +1,1 @@
-raspivid -t 0 -w 1280 -h 720 -hf -vf -fps 20 -o - | nc -l -p 8080
+raspivid -t 0 -w 640 -h 360 -hf -vf -fps 20 -o - | nc -l -p 8080
