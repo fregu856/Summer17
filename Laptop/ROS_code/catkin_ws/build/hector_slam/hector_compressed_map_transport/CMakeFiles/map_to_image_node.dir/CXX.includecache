@@ -34,7 +34,7 @@ nav_msgs/MapMetaData.h
 Eigen/Core
 -
 
-/opt/ros/kinetic/include/cv_bridge/cv_bridge.h
+/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h
 -
 sensor_msgs/CompressedImage.h

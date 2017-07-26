@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"hector_compressed_map_transport\"
 
-CXX_INCLUDES = -isystem /opt/ros/kinetic/include/opencv-3.2.0-dev -isystem /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv -I/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/hector_slam/hector_map_tools/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 
+CXX_INCLUDES = -isystem /opt/ros/kinetic/include/opencv-3.2.0-dev -isystem /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv -I/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/vision_opencv/cv_bridge/include -I/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/hector_slam/hector_map_tools/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 
 

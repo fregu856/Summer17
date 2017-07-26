@@ -1,0 +1,8 @@
+prefix=/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/devel
+
+Name: ORB-SLAM
+Description: Description of ORB-SLAM
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/devel/lib 
+Requires: 
