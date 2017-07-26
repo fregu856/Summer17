@@ -147,6 +147,15 @@ Run SLAM on the laptop using Hector SLAM (only using the LiDAR scans, the car do
 - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch
 - [Laptop terminal 2] $ roslaunch test_pckg test_Hector.launch
 
+*****
+Camera calibration
+- TODO!
+
+
+*****
+ORB-SLAM
+- TODO!
+
  
 
 
